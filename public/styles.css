@@ -111,6 +111,9 @@ tbody tr:hover { background: rgba(47, 129, 247, 0.06); }
 .badge-assigned { background: rgba(47, 129, 247, 0.18); color: var(--color-accent); }
 .badge-in-progress { background: rgba(210, 153, 34, 0.18); color: var(--color-warn); }
 .badge-restored { background: rgba(46, 160, 67, 0.18); color: var(--color-ok); }
+.badge-residential { background: rgba(47, 129, 247, 0.18); color: var(--color-accent); }
+.badge-commercial { background: rgba(210, 153, 34, 0.18); color: var(--color-warn); }
+.badge-industrial { background: rgba(138, 160, 188, 0.18); color: var(--color-muted); }
 
 select, input, button {
   background: var(--color-bg);
@@ -121,8 +124,28 @@ select, input, button {
   font-size: 0.88rem;
 }
 
-.outage-form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.outage-form input { flex: 1 1 160px; }
+.outage-form, .entity-form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.outage-form input, .entity-form input { flex: 1 1 160px; }
+
+.tabs { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--color-border); }
+.tab {
+  background: transparent;
+  color: var(--color-muted);
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+}
+.tab:hover { color: var(--color-text); filter: none; }
+.tab-active {
+  background: var(--color-panel);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.tab-panel { display: flex; flex-direction: column; gap: 1.25rem; }
+.tab-panel[hidden] { display: none; }
 
 button {
   background: var(--color-accent);
