@@ -24,54 +24,99 @@
       <div class="stat-card"><span class="stat-value" id="stat-customers">--</span><span class="stat-label">Customers</span></div>
     </section>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Outages</h2>
-        <select id="status-filter" aria-label="Filter outages by status">
-          <option value="">All statuses</option>
-          <option value="reported">Reported</option>
-          <option value="assigned">Assigned</option>
-          <option value="in-progress">In progress</option>
-          <option value="restored">Restored</option>
-        </select>
-      </div>
-      <table>
-        <thead>
-          <tr><th>ID</th><th>Feeder</th><th>Cause</th><th>Severity</th><th>Status</th><th>Affected</th><th>Crew</th><th>Reported</th></tr>
-        </thead>
-        <tbody id="outage-rows"></tbody>
-      </table>
-    </section>
+    <nav class="tabs" id="tabs">
+      <button type="button" class="tab tab-active" data-tab="operations" aria-selected="true">Operations</button>
+      <button type="button" class="tab" data-tab="customers" aria-selected="false">Customers</button>
+    </nav>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Report New Outage</h2>
-      </div>
-      <form id="outage-form" class="outage-form">
-        <input name="feederId" placeholder="Feeder ID (e.g. FDR-07)" required />
-        <input name="cause" placeholder="Cause (e.g. storm)" required />
-        <select name="severity" aria-label="Outage severity">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-          <option value="critical">Critical</option>
-        </select>
-        <input name="customersAffected" type="number" min="0" placeholder="Customers affected" />
-        <button type="submit">Report Outage</button>
-      </form>
-    </section>
+    <div id="tab-operations" class="tab-panel">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Outages</h2>
+          <select id="status-filter" aria-label="Filter outages by status">
+            <option value="">All statuses</option>
+            <option value="reported">Reported</option>
+            <option value="assigned">Assigned</option>
+            <option value="in-progress">In progress</option>
+            <option value="restored">Restored</option>
+          </select>
+        </div>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Feeder</th><th>Cause</th><th>Severity</th><th>Status</th><th>Affected</th><th>Crew</th><th>Reported</th></tr>
+          </thead>
+          <tbody id="outage-rows"></tbody>
+        </table>
+      </section>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Meters</h2>
-      </div>
-      <table>
-        <thead>
-          <tr><th>Meter</th><th>Customer</th><th>Type</th><th>Multiplier</th><th>Installed</th></tr>
-        </thead>
-        <tbody id="meter-rows"></tbody>
-      </table>
-    </section>
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Report New Outage</h2>
+        </div>
+        <form id="outage-form" class="entity-form">
+          <input name="feederId" placeholder="Feeder ID (e.g. FDR-07)" required />
+          <input name="cause" placeholder="Cause (e.g. storm)" required />
+          <select name="severity" aria-label="Outage severity">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+          <input name="customersAffected" type="number" min="0" placeholder="Customers affected" />
+          <button type="submit">Report Outage</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Meters</h2>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Meter</th><th>Customer</th><th>Type</th><th>Multiplier</th><th>Installed</th></tr>
+          </thead>
+          <tbody id="meter-rows"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <div id="tab-customers" class="tab-panel" hidden>
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Add New Customer</h2>
+        </div>
+        <form id="customer-form" class="entity-form">
+          <input name="name" placeholder="Name (e.g. Riverside Bakery)" required />
+          <select name="type" aria-label="Customer type">
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+            <option value="industrial">Industrial</option>
+          </select>
+          <input name="address" placeholder="Address (e.g. 12 Mill Rd)" required />
+          <input name="feederId" placeholder="Feeder ID (e.g. FDR-07)" required />
+          <select name="rateClass" aria-label="Rate class">
+            <option value="RES-1">RES-1</option>
+            <option value="GS-1">GS-1</option>
+            <option value="GS-2">GS-2</option>
+            <option value="GS-3">GS-3</option>
+            <option value="IND-1">IND-1</option>
+          </select>
+          <button type="submit">Add Customer</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Customers</h2>
+        </div>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>Type</th><th>Address</th><th>Feeder</th><th>Rate Class</th></tr>
+          </thead>
+          <tbody id="customer-rows"></tbody>
+        </table>
+      </section>
+    </div>
   </main>
 
   <footer>GridWatch demo &mdash; built for GitHub Copilot demonstrations at Harris Utilities</footer>

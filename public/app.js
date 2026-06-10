@@ -80,9 +80,35 @@ async function loadMeters() {
 }
 
 async function loadCustomers() {
-  const { count } = await api.get('/customers');
+  const { data, count } = await api.get('/customers');
   document.getElementById('stat-customers').textContent = count;
+  document.getElementById('customer-rows').innerHTML = data
+    .map(
+      (c) => `<tr>
+        <td>${escapeHtml(c.id)}</td>
+        <td>${escapeHtml(c.name)}</td>
+        <td>${badge(c.type)}</td>
+        <td>${escapeHtml(c.address)}</td>
+        <td>${escapeHtml(c.feederId)}</td>
+        <td>${escapeHtml(c.rateClass)}</td>
+      </tr>`
+    )
+    .join('');
 }
+
+function activateTab(name) {
+  document.querySelectorAll('.tab').forEach((tab) => {
+    const selected = tab.dataset.tab === name;
+    tab.classList.toggle('tab-active', selected);
+    tab.setAttribute('aria-selected', String(selected));
+  });
+  document.getElementById('tab-operations').hidden = name !== 'operations';
+  document.getElementById('tab-customers').hidden = name !== 'customers';
+}
+
+document.querySelectorAll('.tab').forEach((tab) => {
+  tab.addEventListener('click', () => activateTab(tab.dataset.tab));
+});
 
 document.getElementById('status-filter').addEventListener('change', loadOutages);
 
@@ -94,6 +120,19 @@ document.getElementById('outage-form').addEventListener('submit', async (e) => {
     await api.post('/outages', payload);
     form.reset();
     await loadOutages();
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+document.getElementById('customer-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const payload = Object.fromEntries(new FormData(form).entries());
+  try {
+    await api.post('/customers', payload);
+    form.reset();
+    await loadCustomers();
   } catch (err) {
     alert(err.message);
   }

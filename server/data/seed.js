@@ -94,3 +94,9 @@ let outageCounter = 155;
 export function nextOutageId() {
   return `OUT-2026-${String(outageCounter++).padStart(4, '0')}`;
 }
+
+let customerCounter = 1009;
+
+export function nextCustomerId() {
+  return `CUST-${customerCounter++}`;
+}
