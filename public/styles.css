@@ -124,8 +124,8 @@ select, input, button {
   font-size: 0.88rem;
 }
 
-.outage-form, .entity-form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.outage-form input, .entity-form input { flex: 1 1 160px; }
+.entity-form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.entity-form input { flex: 1 1 160px; }
 
 .tabs { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--color-border); }
 .tab {
