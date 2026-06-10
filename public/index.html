@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GridWatch | Harris Utilities Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">&#9889;</span>
+      <h1>GridWatch</h1>
+      <span class="brand-sub">Outage &amp; Meter Operations</span>
+    </div>
+    <div id="health-pill" class="pill pill-unknown">API: checking...</div>
+  </header>
+
+  <main>
+    <section class="stats" id="stats">
+      <div class="stat-card"><span class="stat-value" id="stat-active">--</span><span class="stat-label">Active Outages</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-affected">--</span><span class="stat-label">Customers Affected</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-meters">--</span><span class="stat-label">Meters</span></div>
+      <div class="stat-card"><span class="stat-value" id="stat-customers">--</span><span class="stat-label">Customers</span></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Outages</h2>
+        <select id="status-filter" aria-label="Filter outages by status">
+          <option value="">All statuses</option>
+          <option value="reported">Reported</option>
+          <option value="assigned">Assigned</option>
+          <option value="in-progress">In progress</option>
+          <option value="restored">Restored</option>
+        </select>
+      </div>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Feeder</th><th>Cause</th><th>Severity</th><th>Status</th><th>Affected</th><th>Crew</th><th>Reported</th></tr>
+        </thead>
+        <tbody id="outage-rows"></tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Report New Outage</h2>
+      </div>
+      <form id="outage-form" class="outage-form">
+        <input name="feederId" placeholder="Feeder ID (e.g. FDR-07)" required />
+        <input name="cause" placeholder="Cause (e.g. storm)" required />
+        <select name="severity" aria-label="Outage severity">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="critical">Critical</option>
+        </select>
+        <input name="customersAffected" type="number" min="0" placeholder="Customers affected" />
+        <button type="submit">Report Outage</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Meters</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Meter</th><th>Customer</th><th>Type</th><th>Multiplier</th><th>Installed</th></tr>
+        </thead>
+        <tbody id="meter-rows"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>GridWatch demo &mdash; built for GitHub Copilot demonstrations at Harris Utilities</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

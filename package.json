@@ -1,0 +1,16 @@
+{
+  "name": "gridwatch",
+  "version": "1.0.0",
+  "description": "GridWatch - utility outage and meter management demo app for GitHub Copilot demos",
+  "main": "server/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "test": "node --test server/tests/*.test.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
