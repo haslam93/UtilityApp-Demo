@@ -8,8 +8,46 @@
   --color-ok: #2ea043;
   --color-warn: #d29922;
   --color-danger: #f85149;
+  --color-on-accent: #ffffff;
   --radius: 10px;
   font-size: 15px;
+}
+
+:root[data-theme="light"] {
+  --color-bg: #f4f6fa;
+  --color-panel: #ffffff;
+  --color-border: #d4dce8;
+  --color-text: #1f2733;
+  --color-muted: #5a6b82;
+  --color-accent: #0b66d0;
+  --color-ok: #1a7f37;
+  --color-warn: #9a6700;
+  --color-danger: #cf222e;
+}
+
+:root[data-theme="solar"] {
+  --color-bg: #fdf6e3;
+  --color-panel: #fffaf0;
+  --color-border: #e3d9bc;
+  --color-text: #433d2c;
+  --color-muted: #8a7f5e;
+  --color-accent: #b58900;
+  --color-ok: #859900;
+  --color-warn: #cb4b16;
+  --color-danger: #dc322f;
+}
+
+:root[data-theme="high-contrast"] {
+  --color-bg: #000000;
+  --color-panel: #0a0a0a;
+  --color-border: #6e6e6e;
+  --color-text: #ffffff;
+  --color-muted: #c8c8c8;
+  --color-accent: #58a6ff;
+  --color-ok: #3fb950;
+  --color-warn: #f0c000;
+  --color-danger: #ff6a69;
+  --color-on-accent: #000000;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,6 +70,10 @@ body {
   background: var(--color-panel);
 }
 
+.topbar-controls { display: flex; align-items: center; gap: 0.75rem; }
+
+.theme-picker { display: flex; align-items: center; gap: 0.4rem; color: var(--color-muted); font-size: 0.8rem; }
+
 .brand { display: flex; align-items: baseline; gap: 0.6rem; }
 .brand-icon { font-size: 1.4rem; }
 .brand h1 { font-size: 1.3rem; }
@@ -43,9 +85,9 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
 }
-.pill-ok { background: rgba(46, 160, 67, 0.2); color: var(--color-ok); }
-.pill-down { background: rgba(248, 81, 73, 0.2); color: var(--color-danger); }
-.pill-unknown { background: rgba(138, 160, 188, 0.2); color: var(--color-muted); }
+.pill-ok { background: color-mix(in srgb, var(--color-ok) 20%, transparent); color: var(--color-ok); }
+.pill-down { background: color-mix(in srgb, var(--color-danger) 20%, transparent); color: var(--color-danger); }
+.pill-unknown { background: color-mix(in srgb, var(--color-muted) 20%, transparent); color: var(--color-muted); }
 
 main {
   flex: 1;
@@ -93,7 +135,7 @@ main {
 table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
 th, td { text-align: left; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--color-border); }
 th { color: var(--color-muted); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em; }
-tbody tr:hover { background: rgba(47, 129, 247, 0.06); }
+tbody tr:hover { background: color-mix(in srgb, var(--color-accent) 6%, transparent); }
 
 .badge {
   display: inline-block;
@@ -103,14 +145,14 @@ tbody tr:hover { background: rgba(47, 129, 247, 0.06); }
   font-weight: 600;
   text-transform: capitalize;
 }
-.badge-low { background: rgba(138, 160, 188, 0.18); color: var(--color-muted); }
-.badge-medium { background: rgba(210, 153, 34, 0.18); color: var(--color-warn); }
-.badge-high { background: rgba(248, 81, 73, 0.18); color: var(--color-danger); }
-.badge-critical { background: var(--color-danger); color: #fff; }
-.badge-reported { background: rgba(138, 160, 188, 0.18); color: var(--color-muted); }
-.badge-assigned { background: rgba(47, 129, 247, 0.18); color: var(--color-accent); }
-.badge-in-progress { background: rgba(210, 153, 34, 0.18); color: var(--color-warn); }
-.badge-restored { background: rgba(46, 160, 67, 0.18); color: var(--color-ok); }
+.badge-low { background: color-mix(in srgb, var(--color-muted) 18%, transparent); color: var(--color-muted); }
+.badge-medium { background: color-mix(in srgb, var(--color-warn) 18%, transparent); color: var(--color-warn); }
+.badge-high { background: color-mix(in srgb, var(--color-danger) 18%, transparent); color: var(--color-danger); }
+.badge-critical { background: var(--color-danger); color: var(--color-on-accent); }
+.badge-reported { background: color-mix(in srgb, var(--color-muted) 18%, transparent); color: var(--color-muted); }
+.badge-assigned { background: color-mix(in srgb, var(--color-accent) 18%, transparent); color: var(--color-accent); }
+.badge-in-progress { background: color-mix(in srgb, var(--color-warn) 18%, transparent); color: var(--color-warn); }
+.badge-restored { background: color-mix(in srgb, var(--color-ok) 18%, transparent); color: var(--color-ok); }
 
 select, input, button {
   background: var(--color-bg);
@@ -126,6 +168,7 @@ select, input, button {
 
 button {
   background: var(--color-accent);
+  color: var(--color-on-accent);
   border: none;
   font-weight: 600;
   cursor: pointer;
