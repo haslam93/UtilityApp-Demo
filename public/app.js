@@ -25,6 +25,36 @@ const badge = (value) => `<span class="badge badge-${escapeHtml(value)}">${escap
 
 const formatTime = (iso) => (iso ? new Date(iso).toLocaleString() : '—');
 
+const THEMES = ['dark', 'light', 'solar', 'high-contrast'];
+const THEME_STORAGE_KEY = 'gridwatch-theme';
+
+function applyTheme(theme) {
+  const next = THEMES.includes(theme) ? theme : 'dark';
+  if (next === 'dark') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', next);
+  }
+  document.getElementById('theme-select').value = next;
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, next);
+  } catch {
+    // localStorage unavailable (e.g. private browsing) — theme just won't persist
+  }
+}
+
+function initTheme() {
+  let saved = null;
+  try {
+    saved = localStorage.getItem(THEME_STORAGE_KEY);
+  } catch {
+    // localStorage unavailable — fall back to default theme
+  }
+  applyTheme(saved ?? 'dark');
+}
+
+document.getElementById('theme-select').addEventListener('change', (e) => applyTheme(e.target.value));
+
 async function loadHealth() {
   const pill = document.getElementById('health-pill');
   try {
@@ -99,6 +129,7 @@ document.getElementById('outage-form').addEventListener('submit', async (e) => {
   }
 });
 
+initTheme();
 loadHealth();
 loadOutages();
 loadMeters();
